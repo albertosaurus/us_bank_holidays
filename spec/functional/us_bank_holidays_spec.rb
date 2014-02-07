@@ -125,6 +125,10 @@ describe UsBankHolidays do
       it 'should not treat regular weekdays as bank holidays' do
         sample_weekdays.each { |day| day.bank_holiday?.should be_false }
       end
+
+      it 'if Jan. 1 falls on a Saturday, Dec. 31 of the previous year should be a bank holiday' do
+        Date.new(2021, 12, 31).bank_holiday?.should be_true
+      end
     end
 
     describe '.weekend?' do

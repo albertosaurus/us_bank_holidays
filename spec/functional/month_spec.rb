@@ -32,8 +32,44 @@ Su Mo Tu We Th Fr Sa
       JAN
     }
 
+    let(:february_str) {
+      <<-FEB
+Su Mo Tu We Th Fr Sa
+ 1  2  3  4  5  6  7
+ 8  9 10 11 12 13 14
+15 16 17 18 19 20 21
+22 23 24 25 26 27 28
+      FEB
+    }
+
+    let(:august_str) {
+      <<-AUG
+Su Mo Tu We Th Fr Sa
+                1  2
+ 3  4  5  6  7  8  9
+10 11 12 13 14 15 16
+17 18 19 20 21 22 23
+24 25 26 27 28 29 30
+31
+      AUG
+    }
+
+    let(:december_str) {
+      <<-DEC
+Su Mo Tu We Th Fr Sa
+       1  2  3  4  5
+ 6  7  8  9 10 11 12
+13 14 15 16 17 18 19
+20 21 22 23 24 25 26
+27 28 29 30 31
+      DEC
+    }
+
     it 'should convert the month to a string representation' do
-      january.to_s.should == january_str
+      UsBankHolidays::Month.new(2014, 1).to_s.should == january_str
+      UsBankHolidays::Month.new(2015, 2).to_s.should == february_str
+      UsBankHolidays::Month.new(2014, 8).to_s.should == august_str
+      UsBankHolidays::Month.new(2015, 12).to_s.should == december_str
     end
   end
 

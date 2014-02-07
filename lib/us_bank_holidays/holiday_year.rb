@@ -50,18 +50,23 @@ module UsBankHolidays
     end
 
     def bank_holidays
-      @bank_holidays ||= [
-        new_years_day,
-        mlk_day,
-        washingtons_birthday,
-        memorial_day,
-        independence_day,
-        labor_day,
-        columbus_day,
-        veterans_day,
-        thanksgiving,
-        christmas
-      ].freeze
+      @bank_holidays ||= begin
+        holidays = [ new_years_day,
+          mlk_day,
+          washingtons_birthday,
+          memorial_day,
+          independence_day,
+          labor_day,
+          columbus_day,
+          veterans_day,
+          thanksgiving,
+          christmas
+        ]
+        if Date.new(year + 1, 1, 1).saturday?
+          holidays << Date.new(year, 12, 31)
+        end
+        holidays.freeze
+      end
     end
 
     private

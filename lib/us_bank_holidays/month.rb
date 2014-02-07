@@ -58,7 +58,7 @@ module UsBankHolidays
         while current_date.month == month
           week << current_date
           current_date += 1
-          if week.size == 7 || current_date.month > month
+          if week.size == 7 || current_date.month != month
             @weeks << week.freeze
             unless current_date.month > month
               week = []
