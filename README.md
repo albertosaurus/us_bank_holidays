@@ -1,6 +1,18 @@
 # UsBankHolidays
 
+https://github.com/albertosaurus/us_bank_holidays
+
+[![Build Status](https://travis-ci.org/albertosaurus/us_bank_holidays.png?branch=master)](https://travis-ci.org/albertosaurus/us_bank_holidays)
+
 Patches `Date` to make working with US bank holidays easier
+
+## Requirements
+
+Tested against the following Ruby runtimes:
+
+* MRI 1.9.3, 2.0.0, 2.1.0
+* JRuby 1.7+
+* Rubinius (latest)
 
 ## Installation
 
