@@ -1,5 +1,7 @@
 module UsBankHolidays
 
+  # Utility class to calculate where the federal holidays will actually fall
+  # for any given year.
   class HolidayYear
 
     attr_reader :year,
@@ -49,6 +51,9 @@ module UsBankHolidays
 
     end
 
+    # Returns the federal holidays for the given year on the dates they will actually
+    # be observed. In the event that New Year's Day for the following year falls on a
+    # Saturday December 31 will also be included.
     def bank_holidays
       @bank_holidays ||= begin
         holidays = [ new_years_day,
@@ -69,17 +74,19 @@ module UsBankHolidays
       end
     end
 
-    private
-
-      def roll_nominal(nominal)
-        if nominal.saturday?
-          nominal - 1
-        elsif nominal.sunday?
-          nominal + 1
-        else
-          nominal
-        end
+    # Figures out where to roll the given nominal date. If it's a Saturday, assumes
+    # it's the day before (Friday), if Sunday it's the date after (Monday), otherwise
+    # just returns self.
+    def roll_nominal(nominal)
+      if nominal.saturday?
+        nominal - 1
+      elsif nominal.sunday?
+        nominal + 1
+      else
+        nominal
       end
+    end
+    private :roll_nominal
 
   end
 
