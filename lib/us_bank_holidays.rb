@@ -15,6 +15,10 @@ module UsBankHolidays
       ::UsBankHolidays::HolidayYear.new(date.year).bank_holidays.include?(date)
   end
 
+  def self.banking_day?(date)
+    !bank_holiday?(date)
+  end
+
   def self.next_banking_day(date)
     if (next_date = date + 1).bank_holiday?
       next_banking_day(next_date)
@@ -57,6 +61,10 @@ module UsBankHolidays
         (-days).times { day = day.previous_banking_day }
       end
       day
+    end
+
+    def banking_day?
+      !bank_holiday?
     end
   end
 

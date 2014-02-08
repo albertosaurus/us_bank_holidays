@@ -10,7 +10,7 @@ Add this line to your application's Gemfile:
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -31,8 +31,10 @@ date = Date.new(2014, 1, 3)               # Friday, January 3, 2014
 date.bank_holiday?                        # Returns false
 date.weekend?                             # Returns false
 date.next_banking_day                     # Returns Monday, January 6, 2014
+date.banking_day?                         # Returns true
 
 Date.new(2014, 1, 16).add_banking_days(2) # Returns Tuesday, January 21, 2014
+Date.new(2014, 1, 5).previous_banking_day # Returns Friday, January 3, 2014
 ```
 
 ## Contributing

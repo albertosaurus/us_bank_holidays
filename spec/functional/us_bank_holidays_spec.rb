@@ -88,21 +88,33 @@ describe UsBankHolidays do
 
   describe '.bank_holiday?' do
     it 'should determine bank holidays on the list' do
-      sample_holidays.each{ |holiday| UsBankHolidays.bank_holiday?(holiday).should be_true }
+      sample_holidays.each{ |holiday|
+        UsBankHolidays.bank_holiday?(holiday).should be_true
+        UsBankHolidays.banking_day?(holiday).should be_false
+      }
     end
 
     it 'weekends should be bank holidays' do
-      sample_weekends.each{ |weekend| UsBankHolidays.bank_holiday?(weekend).should be_true }
+      sample_weekends.each{ |weekend|
+        UsBankHolidays.bank_holiday?(weekend).should be_true
+        UsBankHolidays.banking_day?(weekend).should be_false
+      }
     end
 
     it 'regular days should not be bank holidays' do
-      sample_weekdays.each { |day| UsBankHolidays.bank_holiday?(day).should be_false }
+      sample_weekdays.each { |day|
+        UsBankHolidays.bank_holiday?(day).should be_false
+        UsBankHolidays.banking_day?(day).should be_true
+      }
     end
   end
 
   describe '.weekend?' do
     it 'should recognize weekends' do
-      sample_weekends.each{ |weekend| UsBankHolidays.weekend?(weekend).should be_true }
+      sample_weekends.each{ |weekend|
+        UsBankHolidays.weekend?(weekend).should be_true
+        UsBankHolidays.banking_day?(weekend).should be_false
+      }
     end
 
     it 'weekdays should not be considered weekends' do
@@ -115,7 +127,10 @@ describe UsBankHolidays do
     describe '.bank_holiday?' do
 
       it 'should recognize bank holidays' do
-        sample_holidays.each{ |holiday| holiday.bank_holiday?.should be_true }
+        sample_holidays.each{ |holiday|
+          holiday.bank_holiday?.should be_true
+          holiday.banking_day?.should be_false
+        }
       end
 
       it 'should treat weekends as bank holidays' do
@@ -123,7 +138,10 @@ describe UsBankHolidays do
       end
 
       it 'should not treat regular weekdays as bank holidays' do
-        sample_weekdays.each { |day| day.bank_holiday?.should be_false }
+        sample_weekdays.each { |day|
+          day.bank_holiday?.should be_false
+          day.banking_day?.should be_true
+        }
       end
 
       it 'if Jan. 1 falls on a Saturday, Dec. 31 of the previous year should be a bank holiday' do
@@ -134,11 +152,17 @@ describe UsBankHolidays do
     describe '.weekend?' do
 
       it 'should recognize weekends' do
-        sample_weekends.each{ |weekend| weekend.weekend?.should be_true }
+        sample_weekends.each{ |weekend|
+          weekend.weekend?.should be_true
+          weekend.banking_day?.should be_false
+        }
       end
 
       it 'weekdays should not be considered weekends' do
-        sample_weekdays.each { |day| day.weekend?.should be_false }
+        sample_weekdays.each { |day|
+          day.weekend?.should be_false
+          day.banking_day?.should be_true
+        }
       end
 
     end
