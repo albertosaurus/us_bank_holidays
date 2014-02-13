@@ -16,8 +16,9 @@ module UsBankHolidays
                 :thanksgiving,
                 :christmas
 
+    # Initializes instance from a given year
     def initialize(year)
-      @year                 = year
+      @year = year
 
       init_fixed_holidays
       init_rolled_holidays

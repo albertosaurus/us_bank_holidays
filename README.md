@@ -4,6 +4,7 @@ https://github.com/albertosaurus/us_bank_holidays
 
 [![Build Status](https://travis-ci.org/albertosaurus/us_bank_holidays.png?branch=master)](https://travis-ci.org/albertosaurus/us_bank_holidays)
 [![Code Climate](https://codeclimate.com/github/albertosaurus/us_bank_holidays.png)](https://codeclimate.com/github/albertosaurus/us_bank_holidays)
+[![Gem Version](https://badge.fury.io/rb/us_bank_holidays.png)](http://badge.fury.io/rb/us_bank_holidays)
 
 Patches `Date` to make working with US bank holidays easier
 
