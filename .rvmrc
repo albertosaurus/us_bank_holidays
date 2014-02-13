@@ -1,1 +1,1 @@
-rvm use jruby@us_bank_holidays --create
+rvm use 2.0.0@us_bank_holidays --create

@@ -19,35 +19,8 @@ module UsBankHolidays
     def initialize(year)
       @year                 = year
 
-      # First of the year, rolls either forward or back.
-      @new_years_day        = roll_nominal(Date.new(year, 1, 1))
-
-      # Third Monday of January
-      @mlk_day              = ::UsBankHolidays::Month.new(year, 1).mondays[2]
-
-      # Third Monday of February
-      @washingtons_birthday = ::UsBankHolidays::Month.new(year, 2).mondays[2]
-
-      # Last Monday of May
-      @memorial_day         = ::UsBankHolidays::Month.new(year, 5).mondays.last
-
-      # 4'th of July
-      @independence_day     = roll_nominal(Date.new(year, 7, 4))
-
-      # First Monday of September
-      @labor_day            = ::UsBankHolidays::Month.new(year, 9).mondays.first
-
-      # Second Monday of October
-      @columbus_day         = ::UsBankHolidays::Month.new(year, 10).mondays[1]
-
-      # November 11
-      @veterans_day         = roll_nominal(Date.new(year, 11, 11))
-
-      # Fourth Thursday of November
-      @thanksgiving         = ::UsBankHolidays::Month.new(year, 11).thursdays[3]
-
-      # December 25
-      @christmas            = roll_nominal(Date.new(year, 12, 25))
+      init_fixed_holidays
+      init_rolled_holidays
 
     end
 
@@ -74,19 +47,77 @@ module UsBankHolidays
       end
     end
 
-    # Figures out where to roll the given nominal date. If it's a Saturday, assumes
-    # it's the day before (Friday), if Sunday it's the date after (Monday), otherwise
-    # just returns self.
-    def roll_nominal(nominal)
-      if nominal.saturday?
-        nominal - 1
-      elsif nominal.sunday?
-        nominal + 1
-      else
-        nominal
+    {
+      :january   => 1,
+      :february  => 2,
+      :march     => 3,
+      :april     => 4,
+      :may       => 5,
+      :june      => 6,
+      :july      => 7,
+      :august    => 8,
+      :september => 9,
+      :october   => 10,
+      :november  => 11,
+      :december  => 12
+    }.each do |month_name, month_index|
+      # Create a method that returns an instance of UsBankHolidays::Month for
+      # the needed month
+      define_method(month_name) do
+        ::UsBankHolidays::Month.new(year, month_index)
       end
     end
-    private :roll_nominal
+
+    private
+
+      # These holidays are always fixed
+      def init_fixed_holidays
+        # Third Monday of January
+        @mlk_day              = january.mondays[2]
+
+        # Third Monday of February
+        @washingtons_birthday = february.mondays[2]
+
+        # Last Monday of May
+        @memorial_day         = may.mondays.last
+
+        # First Monday of September
+        @labor_day            = september.mondays.first
+
+        # Second Monday of October
+        @columbus_day         = october.mondays[1]
+
+        # Fourth Thursday of November
+        @thanksgiving         = november.thursdays[3]
+      end
+
+      # These holidays are potentially rolled if they come on a weekend.
+      def init_rolled_holidays
+        # First of the year, rolls either forward or back.
+        @new_years_day    = roll_nominal(Date.new(year, 1, 1))
+
+        # 4'th of July
+        @independence_day = roll_nominal(Date.new(year, 7, 4))
+
+        # November 11
+        @veterans_day     = roll_nominal(Date.new(year, 11, 11))
+
+        # December 25
+        @christmas        = roll_nominal(Date.new(year, 12, 25))
+      end
+
+      # Figures out where to roll the given nominal date. If it's a Saturday, assumes
+      # it's the day before (Friday), if Sunday it's the date after (Monday), otherwise
+      # just returns self.
+      def roll_nominal(nominal)
+        if nominal.saturday?
+          nominal - 1
+        elsif nominal.sunday?
+          nominal + 1
+        else
+          nominal
+        end
+      end
 
   end
 

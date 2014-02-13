@@ -20,4 +20,30 @@ describe UsBankHolidays::HolidayYear do
   it 'should declare Dec. 31 a bank holiday if it falls on a Friday' do
     UsBankHolidays::HolidayYear.new(2021).bank_holidays.last.should == Date.new(2021, 12, 31)
   end
+
+  context 'Months' do
+    let(:year) { UsBankHolidays::HolidayYear.new(2014) }
+
+    {
+      :january   => 1,
+      :february  => 2,
+      :march     => 3,
+      :april     => 4,
+      :may       => 5,
+      :june      => 6,
+      :july      => 7,
+      :august    => 8,
+      :september => 9,
+      :october   => 10,
+      :november  => 11,
+      :december  => 12
+    }.each do |month_name, month_index|
+      it "should respond to '#{month_name}' and return the right month" do
+        year.respond_to?(month_name).should be_true
+        month = year.send(month_name)
+        month.year.should  == 2014
+        month.month.should == month_index
+      end
+    end
+  end
 end
