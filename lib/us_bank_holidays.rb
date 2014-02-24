@@ -12,9 +12,14 @@ module UsBankHolidays
   end
 
   # Returns true if the given date is a bank holiday, false otherwise.
-  def self.bank_holiday?(date)
-    weekend?(date) ||
+  # Pass the optional 'include_weekends' to control whether weekends should count as
+  # bank holidays (default is true).
+  def self.bank_holiday?(date, include_weekends = true)
+    if include_weekends && weekend?(date)
+      true
+    else
       ::UsBankHolidays::HolidayYear.new(date.year).bank_holidays.include?(date)
+    end
   end
 
   # Returns true if the given date is a banking day, i.e. is not a bank holiday,
@@ -48,8 +53,10 @@ module UsBankHolidays
     end
 
     # Returns true if the date is a bank holiday, false otherwise.
-    def bank_holiday?
-      ::UsBankHolidays.bank_holiday? self
+    # Pass the optional 'include_weekends' to control whether weekends should count as
+    # bank holidays (default is true).
+    def bank_holiday?(include_weekends = true)
+      ::UsBankHolidays.bank_holiday? self, include_weekends
     end
 
     # Returns the next banking day after this one.

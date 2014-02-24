@@ -51,6 +51,14 @@ Date.new(2014, 1, 16).add_banking_days(2) # Returns Tuesday, January 21, 2014
 Date.new(2014, 1, 5).previous_banking_day # Returns Friday, January 3, 2014
 ```
 
+By default, weekends always count as bank holidays, but this can be disabled.
+
+```ruby
+date = Date.new(2014, 2, 2)               # Sunday, February 2, 2014
+date.bank_holiday?                        # Returns true
+date.bank_holiday?(false)                 # Returns false
+```
+
 ## Contributing
 
 1. Fork it
