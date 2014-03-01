@@ -87,6 +87,16 @@ module UsBankHolidays
     def banking_day?
       !bank_holiday?
     end
+
+    # Returns true if the date is the last banking day of the month, false otherwise.
+    def last_banking_day_of_month?
+      !bank_holiday? && next_banking_day.month != month
+    end
+
+    # Returns true if the date is the first banking day of the month, false otherwise.
+    def first_banking_day_of_month?
+      !bank_holiday? && previous_banking_day.month != month
+    end
   end
 
 end

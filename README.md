@@ -46,6 +46,8 @@ date.bank_holiday?                        # Returns false
 date.weekend?                             # Returns false
 date.next_banking_day                     # Returns Monday, January 6, 2014
 date.banking_day?                         # Returns true
+date.first_banking_day_of_month?          # Returns false
+date.last_banking_day_of_month?           # Returns false
 
 Date.new(2014, 1, 16).add_banking_days(2) # Returns Tuesday, January 21, 2014
 Date.new(2014, 1, 5).previous_banking_day # Returns Friday, January 3, 2014

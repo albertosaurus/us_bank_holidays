@@ -217,5 +217,25 @@ describe UsBankHolidays do
         Date.new(2014, 1, 21).add_banking_days(-2).should == Date.new(2014, 1, 16)
       end
     end
+
+    describe '.last_banking_day_of_month?' do
+      it 'should determine if a date is the last banking day of the month' do
+        Date.new(2014, 1, 31).last_banking_day_of_month?.should be_true
+        Date.new(2014, 1, 30).last_banking_day_of_month?.should be_false
+
+        Date.new(2014, 11, 30).last_banking_day_of_month?.should be_false
+        Date.new(2014, 11, 28).last_banking_day_of_month?.should be_true
+      end
+    end
+
+    describe '.first_banking_day_of_month?' do
+      it 'should determine if the date if the first banking day of the month' do
+        Date.new(2014, 4, 1).first_banking_day_of_month?.should be_true
+        Date.new(2014, 4, 2).first_banking_day_of_month?.should be_false
+
+        Date.new(2014, 6, 1).first_banking_day_of_month?.should be_false
+        Date.new(2014, 6, 2).first_banking_day_of_month?.should be_true
+      end
+    end
   end
 end
