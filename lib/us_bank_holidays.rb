@@ -14,6 +14,8 @@ module UsBankHolidays
   # Returns true if the given date is a bank holiday, false otherwise.
   # Pass the optional 'include_weekends' to control whether weekends should count as
   # bank holidays (default is true).
+  # If include_weekends is set to false but the date is a Federal bank holiday,
+  # returns true (Ex: 4th of July, 2015, Christmas Day 2016)
   def self.bank_holiday?(date, include_weekends = true)
     if include_weekends && weekend?(date)
       true
@@ -55,6 +57,8 @@ module UsBankHolidays
     # Returns true if the date is a bank holiday, false otherwise.
     # Pass the optional 'include_weekends' to control whether weekends should count as
     # bank holidays (default is true).
+    # If include_weekends is set to false but the date is a Federal bank holiday,
+    # returns true (Ex: 4th of July, 2015, Christmas Day 2016)
     def bank_holiday?(include_weekends = true)
       ::UsBankHolidays.bank_holiday? self, include_weekends
     end
