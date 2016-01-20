@@ -23,19 +23,19 @@ describe UsBankHolidays::Month do
 
     it 'should return true if the month contains the given date' do
       (1..31).each do |mday|
-        january.contains?(Date.new(january.year, january.month, mday)).should be_true
+        january.contains?(Date.new(january.year, january.month, mday)).should eq(true)
       end
     end
 
     it 'should return false if the month is not the same' do
       (1..31).each do |mday|
-        january.contains?(Date.new(2014, 8, mday)).should be_false
+        january.contains?(Date.new(2014, 8, mday)).should eq(false)
       end
     end
 
     it 'should return false if the year is not the same' do
       (1..31).each do |mday|
-        january.contains?(Date.new(2015, 1, mday)).should be_false
+        january.contains?(Date.new(2015, 1, mday)).should eq(false)
       end
     end
   end

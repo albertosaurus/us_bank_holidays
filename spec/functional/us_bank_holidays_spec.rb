@@ -89,28 +89,28 @@ describe UsBankHolidays do
   describe '.bank_holiday?' do
     it 'should determine bank holidays on the list' do
       sample_holidays.each { |holiday|
-        UsBankHolidays.bank_holiday?(holiday).should be_true
-        UsBankHolidays.banking_day?(holiday).should be_false
+        UsBankHolidays.bank_holiday?(holiday).should eq(true)
+        UsBankHolidays.banking_day?(holiday).should eq(false)
       }
     end
 
     it 'weekends should be bank holidays' do
       sample_weekends.each { |weekend|
-        UsBankHolidays.bank_holiday?(weekend).should be_true
-        UsBankHolidays.banking_day?(weekend).should be_false
+        UsBankHolidays.bank_holiday?(weekend).should eq(true)
+        UsBankHolidays.banking_day?(weekend).should eq(false)
       }
     end
 
     it 'should exclude weekends if the appropriate flag is passed' do
       sample_weekends.each { |weekend|
-        UsBankHolidays.bank_holiday?(weekend, false).should be_false
+        UsBankHolidays.bank_holiday?(weekend, false).should eq(false)
       }
     end
 
     it 'regular days should not be bank holidays' do
       sample_weekdays.each { |day|
-        UsBankHolidays.bank_holiday?(day).should be_false
-        UsBankHolidays.banking_day?(day).should be_true
+        UsBankHolidays.bank_holiday?(day).should eq(false)
+        UsBankHolidays.banking_day?(day).should eq(true)
       }
     end
   end
@@ -118,13 +118,13 @@ describe UsBankHolidays do
   describe '.weekend?' do
     it 'should recognize weekends' do
       sample_weekends.each { |weekend|
-        UsBankHolidays.weekend?(weekend).should be_true
-        UsBankHolidays.banking_day?(weekend).should be_false
+        UsBankHolidays.weekend?(weekend).should eq(true)
+        UsBankHolidays.banking_day?(weekend).should eq(false)
       }
     end
 
     it 'weekdays should not be considered weekends' do
-      sample_weekdays.each { |day| UsBankHolidays.weekend?(day).should be_false }
+      sample_weekdays.each { |day| UsBankHolidays.weekend?(day).should eq(false) }
     end
   end
 
@@ -134,15 +134,15 @@ describe UsBankHolidays do
 
       it 'should recognize weekends' do
         sample_weekends.each { |weekend|
-          weekend.weekend?.should     be_true
-          weekend.banking_day?.should be_false
+          weekend.weekend?.should     eq(true)
+          weekend.banking_day?.should eq(false)
         }
       end
 
       it 'weekdays should not be considered weekends' do
         sample_weekdays.each { |day|
-          day.weekend?.should     be_false
-          day.banking_day?.should be_true
+          day.weekend?.should     eq(false)
+          day.banking_day?.should eq(true)
         }
       end
 
@@ -152,31 +152,31 @@ describe UsBankHolidays do
 
       it 'should recognize bank holidays' do
         sample_holidays.each { |holiday|
-          holiday.bank_holiday?.should be_true
-          holiday.banking_day?.should be_false
+          holiday.bank_holiday?.should eq(true)
+          holiday.banking_day?.should eq(false)
         }
       end
 
       it 'should treat weekends as bank holidays' do
-        sample_weekends.each { |weekend| weekend.bank_holiday?.should be_true }
+        sample_weekends.each { |weekend| weekend.bank_holiday?.should eq(true) }
       end
 
       it 'should exclude weekends if the appropriate flag is passed' do
         sample_weekends.each { |weekend|
-          weekend.weekend?.should be_true
-          weekend.bank_holiday?(false).should be_false
+          weekend.weekend?.should eq(true)
+          weekend.bank_holiday?(false).should eq(false)
         }
       end
 
       it 'should not treat regular weekdays as bank holidays' do
         sample_weekdays.each { |day|
-          day.bank_holiday?.should be_false
-          day.banking_day?.should be_true
+          day.bank_holiday?.should eq(false)
+          day.banking_day?.should eq(true)
         }
       end
 
       it 'if Jan. 1 falls on a Saturday, Dec. 31 of the previous year should be a bank holiday' do
-        Date.new(2021, 12, 31).bank_holiday?.should be_true
+        Date.new(2021, 12, 31).bank_holiday?.should eq(true)
       end
     end
 
@@ -220,21 +220,21 @@ describe UsBankHolidays do
 
     describe '.last_banking_day_of_month?' do
       it 'should determine if a date is the last banking day of the month' do
-        Date.new(2014, 1, 31).last_banking_day_of_month?.should be_true
-        Date.new(2014, 1, 30).last_banking_day_of_month?.should be_false
+        Date.new(2014, 1, 31).last_banking_day_of_month?.should eq(true)
+        Date.new(2014, 1, 30).last_banking_day_of_month?.should eq(false)
 
-        Date.new(2014, 11, 30).last_banking_day_of_month?.should be_false
-        Date.new(2014, 11, 28).last_banking_day_of_month?.should be_true
+        Date.new(2014, 11, 30).last_banking_day_of_month?.should eq(false)
+        Date.new(2014, 11, 28).last_banking_day_of_month?.should eq(true)
       end
     end
 
     describe '.first_banking_day_of_month?' do
       it 'should determine if the date if the first banking day of the month' do
-        Date.new(2014, 4, 1).first_banking_day_of_month?.should be_true
-        Date.new(2014, 4, 2).first_banking_day_of_month?.should be_false
+        Date.new(2014, 4, 1).first_banking_day_of_month?.should eq(true)
+        Date.new(2014, 4, 2).first_banking_day_of_month?.should eq(false)
 
-        Date.new(2014, 6, 1).first_banking_day_of_month?.should be_false
-        Date.new(2014, 6, 2).first_banking_day_of_month?.should be_true
+        Date.new(2014, 6, 1).first_banking_day_of_month?.should eq(false)
+        Date.new(2014, 6, 2).first_banking_day_of_month?.should eq(true)
       end
     end
   end

@@ -39,7 +39,7 @@ describe UsBankHolidays::HolidayYear do
       :december  => 12
     }.each do |month_name, month_index|
       it "should respond to '#{month_name}' and return the right month" do
-        year.respond_to?(month_name).should be_true
+        expect(year.respond_to?(month_name)).to eq(true)
         month = year.send(month_name)
         month.year.should  == 2014
         month.month.should == month_index
