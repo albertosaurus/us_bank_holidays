@@ -46,6 +46,12 @@ module UsBankHolidays
     end
   end
 
+  # If enabled (ENV["NO_FRIDAY_HOLIDAY_ACH"]), a Friday that falls a day before
+  # a Saturday that's a bank holiday is considered a bank holiday
+  def self.saturday_holiday_date_rolling?
+    !!ENV["NO_FRIDAY_HOLIDAY_ACH"]
+  end
+
   # Instance methods to be injected into the Date class
   module DateMethods
 

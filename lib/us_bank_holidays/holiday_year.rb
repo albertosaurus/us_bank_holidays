@@ -26,8 +26,7 @@ module UsBankHolidays
     end
 
     # Returns the federal holidays for the given year on the dates they will actually
-    # be observed. In the event that New Year's Day for the following year falls on a
-    # Saturday December 31 will also be included.
+    # be observed.
     def bank_holidays
       @bank_holidays ||= begin
         holidays = [ new_years_day,
@@ -107,11 +106,12 @@ module UsBankHolidays
         @christmas        = roll_nominal(Date.new(year, 12, 25))
       end
 
-      # Figures out where to roll the given nominal date. If it's a Saturday, assumes
-      # it's the day before (Friday), if Sunday it's the date after (Monday), otherwise
+      # Figures out where to roll the given nominal date. If it's a Saturday and
+      # Saturday holiday date rolling is enabled (see UsBankHolidays#saturday_holiday_date_rolling?),
+      # assumes it's the day before (Friday), if Sunday it's the date after (Monday), otherwise
       # just returns self.
       def roll_nominal(nominal)
-        if nominal.saturday?
+        if nominal.saturday? && ::UsBankHolidays.saturday_holiday_date_rolling?
           nominal - 1
         elsif nominal.sunday?
           nominal + 1

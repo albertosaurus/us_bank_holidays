@@ -86,6 +86,10 @@ describe UsBankHolidays do
 
   let(:sample_weekdays) { [3,  4,  5,  6,  7].map{|d| Date.new(2014, 2, d) } }
 
+  before :each do
+    allow(::UsBankHolidays).to receive(:saturday_holiday_date_rolling?).and_return(true)
+  end
+
   describe '.bank_holiday?' do
     it 'should determine bank holidays on the list' do
       sample_holidays.each { |holiday|
