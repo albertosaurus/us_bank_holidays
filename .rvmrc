@@ -1,1 +1,1 @@
-rvm use 2.2@us_bank_holidays --create
+rvm use 2.4.5@us_bank_holidays --create
