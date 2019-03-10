@@ -12,8 +12,8 @@ Patches `Date` to make working with US bank holidays easier
 
 Tested against the following Ruby runtimes:
 
-* MRI 1.9.3, 2.0.0, 2.1.0
-* JRuby 1.7+
+* MRI 2.3, 2.4, 2.5
+* JRuby 9 
 * Rubinius (latest)
 
 ## Installation
