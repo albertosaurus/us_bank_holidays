@@ -9,6 +9,7 @@ module UsBankHolidays
                 :mlk_day,
                 :washingtons_birthday,
                 :memorial_day,
+                :juneteenth,
                 :independence_day,
                 :labor_day,
                 :columbus_day,
@@ -29,22 +30,24 @@ module UsBankHolidays
     # be observed.
     def bank_holidays
       @bank_holidays ||= begin
-        holidays = [ new_years_day,
-          mlk_day,
-          washingtons_birthday,
-          memorial_day,
-          independence_day,
-          labor_day,
-          columbus_day,
-          veterans_day,
-          thanksgiving,
-          christmas
-        ]
-        if Date.new(year + 1, 1, 1).saturday?
-          holidays << Date.new(year, 12, 31)
-        end
-        holidays.freeze
-      end
+                           holidays = [
+                             new_years_day,
+                             mlk_day,
+                             washingtons_birthday,
+                             memorial_day,
+                             juneteenth,
+                             independence_day,
+                             labor_day,
+                             columbus_day,
+                             veterans_day,
+                             thanksgiving,
+                             christmas
+                           ]
+                           if Date.new(year + 1, 1, 1).saturday?
+                             holidays << Date.new(year, 12, 31)
+                           end
+                           holidays.freeze
+                         end
     end
 
     {
@@ -96,7 +99,10 @@ module UsBankHolidays
         # First of the year, rolls either forward or back.
         @new_years_day    = roll_nominal(Date.new(year, 1, 1))
 
-        # 4'th of July
+        # 19th of June
+        @juneteenth       = roll_nominal(Date.new(year, 6, 19))
+
+        # 4th of July
         @independence_day = roll_nominal(Date.new(year, 7, 4))
 
         # November 11

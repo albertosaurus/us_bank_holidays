@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsBankHolidays::HolidayYear do
+RSpec.describe UsBankHolidays::HolidayYear do
 
   context "should determine bank holidays" do
 
@@ -15,6 +15,7 @@ describe UsBankHolidays::HolidayYear do
                                                                             '2017-01-16', #Birthday of Martin Luther King, Jr.
                                                                             '2017-02-20', #Washington’s Birthday
                                                                             '2017-05-29', #Memorial Day
+                                                                            '2017-06-19', #Juneteenth
                                                                             '2017-07-04', #Independence Day
                                                                             '2017-09-04', #Labor Day
                                                                             '2017-10-09', #Columbus Day
@@ -34,6 +35,7 @@ describe UsBankHolidays::HolidayYear do
                                                                             '2017-01-16', #Birthday of Martin Luther King, Jr.
                                                                             '2017-02-20', #Washington’s Birthday
                                                                             '2017-05-29', #Memorial Day
+                                                                            '2017-06-19', #Juneteenth
                                                                             '2017-07-04', #Independence Day
                                                                             '2017-09-04', #Labor Day
                                                                             '2017-10-09', #Columbus Day

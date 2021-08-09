@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsBankHolidays::Month do
+RSpec.describe UsBankHolidays::Month do
   let(:january) { UsBankHolidays::Month.new(2014, 1) }
 
   it 'should record the correct month' do
