@@ -42,7 +42,7 @@ module UsBankHolidays
                              veterans_day,
                              thanksgiving,
                              christmas
-                           ]
+                           ].compact
                            if Date.new(year + 1, 1, 1).saturday?
                              holidays << Date.new(year, 12, 31)
                            end
@@ -100,7 +100,7 @@ module UsBankHolidays
         @new_years_day    = roll_nominal(Date.new(year, 1, 1))
 
         # 19th of June
-        @juneteenth       = roll_nominal(Date.new(year, 6, 19))
+        @juneteenth       = (year > 2020 ? roll_nominal(Date.new(year, 6, 19))  : nil )
 
         # 4th of July
         @independence_day = roll_nominal(Date.new(year, 7, 4))
