@@ -1,51 +1,104 @@
 require 'spec_helper'
 
-describe UsBankHolidays::HolidayYear do
+RSpec.describe UsBankHolidays::HolidayYear do
 
   context "should determine bank holidays" do
 
-    context "Force Saturday date rolling" do
-      before :each do
-        allow(::UsBankHolidays).to receive(:saturday_holiday_date_rolling?).and_return(true)
+    context "Before 2021" do
+
+      context "Force Saturday date rolling" do
+        before :each do
+          allow(::UsBankHolidays).to receive(:saturday_holiday_date_rolling?).and_return(true)
+        end
+
+        it 'should determine bank holidays' do
+          expect(UsBankHolidays::HolidayYear.new(2017).bank_holidays).to eq([
+                                                                              '2017-01-02', #New Year’s Day
+                                                                              '2017-01-16', #Birthday of Martin Luther King, Jr.
+                                                                              '2017-02-20', #Washington’s Birthday
+                                                                              '2017-05-29', #Memorial Day
+                                                                              '2017-07-04', #Independence Day
+                                                                              '2017-09-04', #Labor Day
+                                                                              '2017-10-09', #Columbus Day
+                                                                              '2017-11-10', #Veterans Day
+                                                                              '2017-11-23', #Thanksgiving Day
+                                                                              '2017-12-25' #Christmas Day
+                                                                            ].map { |d| Date.parse(d) }
+                                                                         )
+        end
+
       end
 
-      it 'should determine bank holidays' do
-        expect(UsBankHolidays::HolidayYear.new(2017).bank_holidays).to eq([
-                                                                            '2017-01-02', #New Year’s Day
-                                                                            '2017-01-16', #Birthday of Martin Luther King, Jr.
-                                                                            '2017-02-20', #Washington’s Birthday
-                                                                            '2017-05-29', #Memorial Day
-                                                                            '2017-07-04', #Independence Day
-                                                                            '2017-09-04', #Labor Day
-                                                                            '2017-10-09', #Columbus Day
-                                                                            '2017-11-10', #Veterans Day
-                                                                            '2017-11-23', #Thanksgiving Day
-                                                                            '2017-12-25' #Christmas Day
-                                                                          ].map {|d| Date.parse(d)}
-                                                                       )
+      context "No Saturday date rolling" do
+        it 'should determine bank holidays' do
+          expect(UsBankHolidays::HolidayYear.new(2017).bank_holidays).to eq([
+                                                                              '2017-01-02', #New Year’s Day
+                                                                              '2017-01-16', #Birthday of Martin Luther King, Jr.
+                                                                              '2017-02-20', #Washington’s Birthday
+                                                                              '2017-05-29', #Memorial Day
+                                                                              '2017-07-04', #Independence Day
+                                                                              '2017-09-04', #Labor Day
+                                                                              '2017-10-09', #Columbus Day
+                                                                              '2017-11-11', #Veterans Day
+                                                                              '2017-11-23', #Thanksgiving Day
+                                                                              '2017-12-25' #Christmas Day
+                                                                            ].map { |d| Date.parse(d) }
+                                                                         )
+        end
+
       end
 
     end
 
-    context "No Saturday date rolling" do
-      it 'should determine bank holidays' do
-        expect(UsBankHolidays::HolidayYear.new(2017).bank_holidays).to eq([
-                                                                            '2017-01-02', #New Year’s Day
-                                                                            '2017-01-16', #Birthday of Martin Luther King, Jr.
-                                                                            '2017-02-20', #Washington’s Birthday
-                                                                            '2017-05-29', #Memorial Day
-                                                                            '2017-07-04', #Independence Day
-                                                                            '2017-09-04', #Labor Day
-                                                                            '2017-10-09', #Columbus Day
-                                                                            '2017-11-11', #Veterans Day
-                                                                            '2017-11-23', #Thanksgiving Day
-                                                                            '2017-12-25' #Christmas Day
-                                                                          ].map {|d| Date.parse(d)}
-                                                                       )
+    context "2021 and later" do
+
+      context "Force Saturday date rolling" do
+        before :each do
+          allow(::UsBankHolidays).to receive(:saturday_holiday_date_rolling?).and_return(true)
+        end
+
+        it 'should determine bank holidays' do
+          expect(UsBankHolidays::HolidayYear.new(2021).bank_holidays).to eq([
+                                                                              '2021-01-01', #New Year’s Day
+                                                                              '2021-01-18', #Birthday of Martin Luther King, Jr.
+                                                                              '2021-02-15', #Washington’s Birthday
+                                                                              '2021-05-31', #Memorial Day
+                                                                              '2021-06-18', #Juneteenth
+                                                                              '2021-07-05', #Independence Day
+                                                                              '2021-09-06', #Labor Day
+                                                                              '2021-10-11', #Columbus Day
+                                                                              '2021-11-11', #Veterans Day
+                                                                              '2021-11-25', #Thanksgiving Day
+                                                                              '2021-12-24', #Christmas Day
+                                                                              '2021-12-31'  #New Year’s Day
+                                                                            ].map { |d| Date.parse(d) }
+                                                                         )
+        end
+
+      end
+
+      context "No Saturday date rolling" do
+        it 'should determine bank holidays' do
+          expect(UsBankHolidays::HolidayYear.new(2021).bank_holidays).to eq([
+                                                                              '2021-01-01', #New Year’s Day
+                                                                              '2021-01-18', #Birthday of Martin Luther King, Jr.
+                                                                              '2021-02-15', #Washington’s Birthday
+                                                                              '2021-05-31', #Memorial Day
+                                                                              '2021-06-19', #Juneteenth
+                                                                              '2021-07-05', #Independence Day
+                                                                              '2021-09-06', #Labor Day
+                                                                              '2021-10-11', #Columbus Day
+                                                                              '2021-11-11', #Veterans Day
+                                                                              '2021-11-25', #Thanksgiving Day
+                                                                              '2021-12-25', #Christmas Day
+                                                                              '2021-12-31'  #New Year’s Day
+                                                                            ].map { |d| Date.parse(d) }
+                                                                         )
+        end
+
       end
 
     end
-
 
   end
 

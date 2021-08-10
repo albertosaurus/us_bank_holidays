@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsBankHolidays do
+RSpec.describe UsBankHolidays do
   let(:sample_holidays) {
     [
       '2014-01-01', #New Year’s Day
