@@ -43,7 +43,7 @@ module UsBankHolidays
                              thanksgiving,
                              christmas
                            ].compact
-                           if Date.new(year + 1, 1, 1).saturday?
+                           if Date.new(year + 1, 1, 1).saturday? && ::UsBankHolidays.saturday_holiday_date_rolling?
                              holidays << Date.new(year, 12, 31)
                            end
                            holidays.freeze

@@ -53,6 +53,7 @@ RSpec.describe UsBankHolidays::HolidayYear do
     context "2021 and later" do
 
       context "Force Saturday date rolling" do
+
         before :each do
           allow(::UsBankHolidays).to receive(:saturday_holiday_date_rolling?).and_return(true)
         end
@@ -78,6 +79,10 @@ RSpec.describe UsBankHolidays::HolidayYear do
       end
 
       context "No Saturday date rolling" do
+        before :each do
+          allow(::UsBankHolidays).to receive(:saturday_holiday_date_rolling?).and_return(false)
+        end
+
         it 'should determine bank holidays' do
           expect(UsBankHolidays::HolidayYear.new(2021).bank_holidays).to eq([
                                                                               '2021-01-01', #New Year’s Day
@@ -90,8 +95,7 @@ RSpec.describe UsBankHolidays::HolidayYear do
                                                                               '2021-10-11', #Columbus Day
                                                                               '2021-11-11', #Veterans Day
                                                                               '2021-11-25', #Thanksgiving Day
-                                                                              '2021-12-25', #Christmas Day
-                                                                              '2021-12-31'  #New Year’s Day
+                                                                              '2021-12-25' #Christmas Day
                                                                             ].map { |d| Date.parse(d) }
                                                                          )
         end
@@ -100,10 +104,6 @@ RSpec.describe UsBankHolidays::HolidayYear do
 
     end
 
-  end
-
-  it 'should declare Dec. 31 a bank holiday if it falls on a Friday' do
-    UsBankHolidays::HolidayYear.new(2021).bank_holidays.last.should == Date.new(2021, 12, 31)
   end
 
   context 'Months' do
